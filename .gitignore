@@ -1,0 +1,39 @@
+# Informacja, plan i dokumenty
+Info/
+
+# Sekrety i ustawienia lokalne
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+coverage/
+
+# Pliki wgrywane przez użytkowników i dane lokalne
+storage/
+*.log
+
+# Notatniki: punkty kontrolne
+.ipynb_checkpoints/
+
+# Edytory i system
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

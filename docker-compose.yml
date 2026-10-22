@@ -1,0 +1,50 @@
+# Infrastruktura do pracy lokalnej: baza, Redis, poczta, podgląd bazy.
+# Start: docker compose up -d
+
+name: quizforge
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-quizforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-quizforge}
+      POSTGRES_DB: ${POSTGRES_DB:-quizforge}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-quizforge} -d ${POSTGRES_DB:-quizforge}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+  redisdata:

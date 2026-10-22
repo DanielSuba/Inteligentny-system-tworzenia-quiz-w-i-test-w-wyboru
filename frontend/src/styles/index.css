@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import "@fontsource/atkinson-hyperlegible/400.css";
+@import "@fontsource/atkinson-hyperlegible/700.css";
+
+@font-face {
+  font-family: "ForgePixel";
+  src: url("../assets/fonts/ForgePixel.woff2") format("woff2");
+  font-display: block;
+}
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* %%%%%%%%%%%%%%% Palety %%%%%%%%%%%%%%%%% */
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+/* grafit jest domyslna, pozostale wlacza atrybut data-palette na <html> */
+:root,
+[data-palette="grafit"] {
+  --bg: #0f1115;
+  --surf: #161920;
+  --surf2: #1c2029;
+  --line: #272c37;
+  --fg: #e7e9ee;
+  --mut: #8d93a0;
+  --acc: #f0883e;
+  --accfg: #1d0e03;
+  --ok: #3fb950;
+  --bad: #f85149;
+  --a1: #e5534b;
+  --a2: #539bf5;
+  --a3: #e3b341;
+  --a4: #57ab5a;
+  --ring: #050608;
+  color-scheme: dark;
+}
+
+[data-palette="mosiadz"] {
+  --bg: #12110d;
+  --surf: #1a1813;
+  --surf2: #221f18;
+  --line: #332e23;
+  --fg: #ece6d6;
+  --mut: #9d957f;
+  --acc: #d4a646;
+  --accfg: #1a1404;
+  --ok: #9ccf6b;
+  --bad: #e86a55;
+  --a1: #d0623f;
+  --a2: #5b8fc9;
+  --a3: #e6cf6a;
+  --a4: #6da864;
+  --ring: #060504;
+}
+
+[data-palette="rubin"] {
+  --bg: #130d0f;
+  --surf: #1b1215;
+  --surf2: #24181c;
+  --line: #3a252b;
+  --fg: #f2e7e9;
+  --mut: #a98f97;
+  --acc: #e8364f;
+  --accfg: #ffffff;
+  --ok: #6fcf7d;
+  --bad: #ff8a3d;
+  --a1: #e8364f;
+  --a2: #5b8def;
+  --a3: #e8b04a;
+  --a4: #4fb286;
+  --ring: #060304;
+}
+
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/* %%%%%%%%%% Tokeny dla Tailwinda %%%%%%%%% */
+/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surf: var(--surf);
+  --color-surf2: var(--surf2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-mut: var(--mut);
+  --color-acc: var(--acc);
+  --color-accfg: var(--accfg);
+  --color-ok: var(--ok);
+  --color-bad: var(--bad);
+  --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-pixel: "ForgePixel", ui-monospace, monospace;
+  --radius-*: initial;
+  --shadow-ring: 0 0 0 2px var(--ring);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+
+/* font pixel jest ostry w 12, 24, 36 px; 16 px to ustalony rozmiar napisow */
+.pixel {
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

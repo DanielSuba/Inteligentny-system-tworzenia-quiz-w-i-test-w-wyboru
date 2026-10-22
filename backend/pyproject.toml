@@ -1,0 +1,41 @@
+[project]
+name = "quizforge-backend"
+version = "0.1.0"
+description = "QuizForge: backend (FastAPI)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic-settings",
+    "sqlalchemy[asyncio]",
+    "asyncpg",
+    "alembic",
+    "pgvector",
+    "redis",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "httpx",
+    "ruff",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+# bez regul N (nazwy), bo w projekcie uzywamy camelCase
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B008"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["."]
