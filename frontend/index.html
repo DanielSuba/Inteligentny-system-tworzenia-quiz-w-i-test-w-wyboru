@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>QuizForge</title>
+    <script>
+      // paleta i jezyk ustawione przed pierwszym rysowaniem (bez mrugniecia kolorow)
+      try {
+        var p = localStorage.getItem("qf_palette");
+        if (p === "grafit" || p === "mosiadz" || p === "rubin")
+          document.documentElement.dataset.palette = p;
+        var l = localStorage.getItem("qf_locale");
+        if (l === "pl" || l === "en") document.documentElement.lang = l;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

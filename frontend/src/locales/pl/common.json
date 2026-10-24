@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Start",
+    "profile": "Profil",
+    "settings": "Ustawienia",
+    "login": "Zaloguj się",
+    "register": "Załóż konto",
+    "logout": "Wyloguj",
+    "menu": "Menu",
+    "close": "Zamknij menu",
+    "status": "Stan systemu"
+  },
+  "lang": {
+    "label": "Język",
+    "pl": "Polski",
+    "en": "English"
+  },
+  "palette": {
+    "label": "Paleta",
+    "grafit": "Grafit",
+    "mosiadz": "Mosiądz",
+    "rubin": "Rubin"
+  },
+  "home": {
+    "title": "Quizy z Twoich materiałów",
+    "lead": "Twórz quizy ręcznie albo z pomocą AI, graj ze znajomymi na żywo i ucz się z powtórkami.",
+    "hello": "Cześć, {{name}}",
+    "soon": "Tworzenie quizów pojawi się w kolejnym etapie. Na razie możesz uzupełnić profil.",
+    "toProfile": "Przejdź do profilu"
+  },
+  "errors": {
+    "network_error": "Brak połączenia z serwerem.",
+    "server_error": "Coś poszło nie tak po stronie serwera. Spróbuj ponownie.",
+    "validation_error": "Sprawdź poprawność pól.",
+    "too_many_requests": "Za dużo prób. Odczekaj chwilę i spróbuj ponownie.",
+    "csrf_failed": "Formularz wygasł. Odśwież stronę.",
+    "not_authenticated": "Zaloguj się, aby kontynuować.",
+    "invalid_credentials": "Nieprawidłowy e-mail lub hasło.",
+    "email_not_verified": "Najpierw potwierdź adres e-mail. Link wysłaliśmy przy rejestracji.",
+    "username_taken": "Ta nazwa użytkownika jest zajęta.",
+    "invalid_token": "Link jest nieważny albo wygasł.",
+    "wrong_password": "Obecne hasło jest nieprawidłowe.",
+    "file_too_large": "Plik jest za duży (maks. 2 MB).",
+    "invalid_image": "To nie jest obsługiwany obraz (JPG, PNG, WebP, GIF).",
+    "invalid_email": "Ten adres e-mail jest niepoprawny albo jego domena nie przyjmuje poczty."
+  },
+  "health": {
+    "title": "Stan systemu",
+    "backend": "Backend (FastAPI)",
+    "db": "Baza danych (PostgreSQL)",
+    "redis": "Redis",
+    "ok": "działa",
+    "error": "nie odpowiada",
+    "wait": "sprawdzam",
+    "retry": "Sprawdź ponownie"
+  },
+  "notFound": {
+    "title": "Nie ma takiej strony",
+    "back": "Wróć na start"
+  },
+  "loading": "Ładowanie…",
+  "save": "Zapisz",
+  "saved": "Zapisano"
+}

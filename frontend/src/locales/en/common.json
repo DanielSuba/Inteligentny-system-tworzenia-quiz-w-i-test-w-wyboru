@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings",
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "menu": "Menu",
+    "close": "Close menu",
+    "status": "System status"
+  },
+  "lang": {
+    "label": "Language",
+    "pl": "Polski",
+    "en": "English"
+  },
+  "palette": {
+    "label": "Palette",
+    "grafit": "Graphite",
+    "mosiadz": "Brass",
+    "rubin": "Ruby"
+  },
+  "home": {
+    "title": "Quizzes from your materials",
+    "lead": "Create quizzes by hand or with AI, play live with friends, and learn with spaced repetition.",
+    "hello": "Hi, {{name}}",
+    "soon": "Quiz creation comes in the next stage. For now you can fill in your profile.",
+    "toProfile": "Go to profile"
+  },
+  "errors": {
+    "network_error": "Can't reach the server.",
+    "server_error": "Something went wrong on the server. Try again.",
+    "validation_error": "Check the fields.",
+    "too_many_requests": "Too many attempts. Wait a moment and try again.",
+    "csrf_failed": "The form expired. Refresh the page.",
+    "not_authenticated": "Log in to continue.",
+    "invalid_credentials": "Wrong email or password.",
+    "email_not_verified": "Confirm your email first. We sent the link when you signed up.",
+    "username_taken": "This username is taken.",
+    "invalid_token": "The link is invalid or has expired.",
+    "wrong_password": "Current password is wrong.",
+    "file_too_large": "The file is too large (max 2 MB).",
+    "invalid_image": "Unsupported image (use JPG, PNG, WebP or GIF).",
+    "invalid_email": "This email address is invalid or its domain can't receive mail."
+  },
+  "health": {
+    "title": "System status",
+    "backend": "Backend (FastAPI)",
+    "db": "Database (PostgreSQL)",
+    "redis": "Redis",
+    "ok": "running",
+    "error": "not responding",
+    "wait": "checking",
+    "retry": "Check again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  },
+  "loading": "Loading…",
+  "save": "Save",
+  "saved": "Saved"
+}

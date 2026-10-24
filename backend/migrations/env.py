@@ -5,6 +5,7 @@ from alembic import context
 from sqlalchemy.ext.asyncio import create_async_engine
 
 from app.config import getSettings
+from app.db import models  # noqa: F401  (rejestruje tabele)
 from app.db.base import Base
 
 config = context.config

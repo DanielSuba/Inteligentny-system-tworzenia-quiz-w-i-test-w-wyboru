@@ -1,29 +1,4 @@
-// ikony pikselowe: '#' to zapalony piksel
-const icons = {
-  anvil: [
-    "............",
-    "############",
-    ".###########",
-    "..#########.",
-    "......###...",
-    ".....#####..",
-    "....#######.",
-    "....#######.",
-  ],
-  refresh: [
-    "...######...",
-    "..#......#..",
-    ".#........#.",
-    "#.........#.",
-    "#.......#####",
-    "#........###.",
-    ".#........#..",
-    "..#......#...",
-    "...######....",
-  ],
-};
-
-export type IconName = keyof typeof icons;
+import { icons, type IconName } from "@/components/ui/pixelIcons";
 
 type Props = { name: IconName; scale?: number; className?: string };
 

@@ -1,0 +1,28 @@
+{
+  "title": "Profil",
+  "avatar": {
+    "label": "Avatar",
+    "upload": "Wgraj obraz",
+    "remove": "Usuń avatar",
+    "hint": "JPG, PNG, WebP lub GIF, do 2 MB. Obraz zostanie przycięty do kwadratu."
+  },
+  "fields": {
+    "displayName": "Wyświetlana nazwa",
+    "username": "Nazwa użytkownika",
+    "bio": "O mnie",
+    "bioHint": "Do 300 znaków."
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "look": "Wygląd",
+    "language": "Język",
+    "account": "Konto",
+    "email": "E-mail",
+    "password": "Zmiana hasła",
+    "current": "Obecne hasło",
+    "new": "Nowe hasło",
+    "repeat": "Powtórz nowe hasło",
+    "change": "Zmień hasło",
+    "changed": "Hasło zmienione. Inne urządzenia zostały wylogowane."
+  }
+}

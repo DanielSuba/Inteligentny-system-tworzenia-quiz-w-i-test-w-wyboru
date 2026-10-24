@@ -28,6 +28,16 @@ class Settings(BaseSettings):
     smtpPort: int = 1025
     mailFrom: str = "QuizForge <no-reply@quizforge.local>"
 
+    # pliki uzytkownikow (avatary, pozniej materialy)
+    storageDir: Path = ROOT / "storage"
+    avatarMaxMb: int = 2
+
+    sessionDays: int = 30
+
+    @property
+    def isProd(self) -> bool:
+        return self.appEnv == "prod"
+
 
 @lru_cache
 def getSettings() -> Settings:

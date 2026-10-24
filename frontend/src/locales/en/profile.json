@@ -1,0 +1,28 @@
+{
+  "title": "Profile",
+  "avatar": {
+    "label": "Avatar",
+    "upload": "Upload image",
+    "remove": "Remove avatar",
+    "hint": "JPG, PNG, WebP or GIF, up to 2 MB. The image will be cropped to a square."
+  },
+  "fields": {
+    "displayName": "Display name",
+    "username": "Username",
+    "bio": "About me",
+    "bioHint": "Up to 300 characters."
+  },
+  "settings": {
+    "title": "Settings",
+    "look": "Appearance",
+    "language": "Language",
+    "account": "Account",
+    "email": "Email",
+    "password": "Change password",
+    "current": "Current password",
+    "new": "New password",
+    "repeat": "Repeat new password",
+    "change": "Change password",
+    "changed": "Password changed. Other devices were logged out."
+  }
+}
