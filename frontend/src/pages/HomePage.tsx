@@ -15,7 +15,7 @@ export function HomePage() {
       {user ? (
         <>
           <p className="text-mut">{t("home.soon")}</p>
-          <Link to="/profile" className="self-start text-acc hover:underline">
+          <Link to="/quizzes" className="self-start text-acc hover:underline">
             {t("home.toProfile")}
           </Link>
         </>

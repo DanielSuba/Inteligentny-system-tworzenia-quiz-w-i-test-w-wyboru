@@ -30,6 +30,13 @@
   --a3: #e3b341;
   --a4: #57ab5a;
   --ring: #050608;
+  /* kolory odpowiedzi 5-10 (wspolne dla palet) */
+  --a5: #2bb3a6;
+  --a6: #9a7ae0;
+  --a7: #e86ba8;
+  --a8: #9ccf3b;
+  --a9: #4fc3f7;
+  --a10: #c9a27a;
   color-scheme: dark;
 }
 

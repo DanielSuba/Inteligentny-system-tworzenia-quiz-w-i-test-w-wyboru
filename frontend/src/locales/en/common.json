@@ -8,7 +8,8 @@
     "logout": "Log out",
     "menu": "Menu",
     "close": "Close menu",
-    "status": "System status"
+    "status": "System status",
+    "quizzes": "My quizzes"
   },
   "lang": {
     "label": "Language",
@@ -25,8 +26,8 @@
     "title": "Quizzes from your materials",
     "lead": "Create quizzes by hand or with AI, play live with friends, and learn with spaced repetition.",
     "hello": "Hi, {{name}}",
-    "soon": "Quiz creation comes in the next stage. For now you can fill in your profile.",
-    "toProfile": "Go to profile"
+    "soon": "Create quizzes and try them in preview. Live games come in later stages.",
+    "toProfile": "Go to my quizzes"
   },
   "errors": {
     "network_error": "Can't reach the server.",
@@ -42,7 +43,14 @@
     "wrong_password": "Current password is wrong.",
     "file_too_large": "The file is too large (max 2 MB).",
     "invalid_image": "Unsupported image (use JPG, PNG, WebP or GIF).",
-    "invalid_email": "This email address is invalid or its domain can't receive mail."
+    "invalid_email": "This email address is invalid or its domain can't receive mail.",
+    "quiz_not_found": "Quiz not found or you don't have access.",
+    "question_not_found": "Question not found.",
+    "forbidden": "You're not allowed to change this.",
+    "invalid_media": "These media can't be attached.",
+    "invalid_url": "Enter an address starting with http:// or https://.",
+    "invalid_order": "The question list changed. Refresh the page.",
+    "invalid_file_type": "This file type isn't supported."
   },
   "health": {
     "title": "System status",

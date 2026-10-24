@@ -26,6 +26,10 @@ export function Header() {
 
   const links = user ? (
     <>
+      <NavLink to="/quizzes" className={linkStyle} onClick={() => setOpen(false)}>
+        <PixelIcon name="sq" scale={1} />
+        {t("nav.quizzes")}
+      </NavLink>
       <NavLink to="/profile" className={linkStyle} onClick={() => setOpen(false)}>
         <Avatar url={user.avatarUrl} name={user.displayName} size={24} />
         {user.displayName}

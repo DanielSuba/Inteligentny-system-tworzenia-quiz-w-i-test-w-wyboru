@@ -8,6 +8,9 @@ import { HomePage } from "@/pages/HomePage";
 import { LoginPage } from "@/pages/LoginPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProfilePage } from "@/pages/ProfilePage";
+import { QuizEditorPage } from "@/pages/QuizEditorPage";
+import { QuizPreviewPage } from "@/pages/QuizPreviewPage";
+import { QuizzesPage } from "@/pages/QuizzesPage";
 import { RegisterPage } from "@/pages/RegisterPage";
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 import { SettingsPage } from "@/pages/SettingsPage";
@@ -54,6 +57,24 @@ const router = createBrowserRouter([
           </RequireAuth>
         ),
       },
+      {
+        path: "/quizzes",
+        element: (
+          <RequireAuth>
+            <QuizzesPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/quizzes/:id/edit",
+        element: (
+          <RequireAuth>
+            <QuizEditorPage />
+          </RequireAuth>
+        ),
+      },
+      { path: "/quizzes/:id/preview", element: <QuizPreviewPage /> },
+      { path: "/share/:token", element: <QuizPreviewPage /> },
       { path: "/status", element: <HealthPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

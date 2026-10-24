@@ -31,6 +31,9 @@ class Settings(BaseSettings):
     # pliki uzytkownikow (avatary, pozniej materialy)
     storageDir: Path = ROOT / "storage"
     avatarMaxMb: int = 2
+    mediaImageMb: int = 5
+    mediaAudioMb: int = 20
+    mediaVideoMb: int = 100
 
     sessionDays: int = 30
 

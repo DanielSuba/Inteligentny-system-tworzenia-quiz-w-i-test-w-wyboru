@@ -8,7 +8,8 @@
     "logout": "Wyloguj",
     "menu": "Menu",
     "close": "Zamknij menu",
-    "status": "Stan systemu"
+    "status": "Stan systemu",
+    "quizzes": "Moje quizy"
   },
   "lang": {
     "label": "Język",
@@ -25,8 +26,8 @@
     "title": "Quizy z Twoich materiałów",
     "lead": "Twórz quizy ręcznie albo z pomocą AI, graj ze znajomymi na żywo i ucz się z powtórkami.",
     "hello": "Cześć, {{name}}",
-    "soon": "Tworzenie quizów pojawi się w kolejnym etapie. Na razie możesz uzupełnić profil.",
-    "toProfile": "Przejdź do profilu"
+    "soon": "Twórz quizy i sprawdzaj je w podglądzie. Gry na żywo pojawią się w kolejnych etapach.",
+    "toProfile": "Przejdź do moich quizów"
   },
   "errors": {
     "network_error": "Brak połączenia z serwerem.",
@@ -42,7 +43,14 @@
     "wrong_password": "Obecne hasło jest nieprawidłowe.",
     "file_too_large": "Plik jest za duży (maks. 2 MB).",
     "invalid_image": "To nie jest obsługiwany obraz (JPG, PNG, WebP, GIF).",
-    "invalid_email": "Ten adres e-mail jest niepoprawny albo jego domena nie przyjmuje poczty."
+    "invalid_email": "Ten adres e-mail jest niepoprawny albo jego domena nie przyjmuje poczty.",
+    "quiz_not_found": "Nie znaleziono quizu albo nie masz do niego dostępu.",
+    "question_not_found": "Nie znaleziono pytania.",
+    "forbidden": "Nie masz uprawnień do tej zmiany.",
+    "invalid_media": "Nie można dołączyć tych mediów.",
+    "invalid_url": "Podaj adres zaczynający się od http:// lub https://.",
+    "invalid_order": "Lista pytań się zmieniła. Odśwież stronę.",
+    "invalid_file_type": "Ten rodzaj pliku nie jest obsługiwany."
   },
   "health": {
     "title": "Stan systemu",
