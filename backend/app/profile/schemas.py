@@ -13,6 +13,7 @@ class MeOut(BaseModel):
     id: uuid.UUID
     email: str
     emailVerified: bool
+    twoFactorEnabled: bool
     role: str
     username: str
     displayName: str

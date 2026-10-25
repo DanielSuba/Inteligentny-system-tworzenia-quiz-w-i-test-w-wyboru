@@ -1,0 +1,49 @@
+# Rejestr modeli komercyjnych: dostawca, id modelu, nazwa, okno kontekstu (tokeny),
+# ceny za 1M tokenow w USD (wejscie / wyjscie) do szacowania kosztow.
+# UWAGA: id i ceny trzeba sprawdzic u dostawcow przed eksperymentami (etap 4/6);
+# puste ceny (null) = nieznane, koszt nie bedzie szacowany.
+# Modele lokalne z LM Studio sa odczytywane na zywo (nie wpisujemy ich tutaj).
+
+models:
+  - provider: openrouter
+    id: deepseek/deepseek-chat
+    name: DeepSeek V3 (OpenRouter)
+    context: 64000
+    priceIn: null
+    priceOut: null
+  - provider: openrouter
+    id: deepseek/deepseek-r1
+    name: DeepSeek R1 (OpenRouter)
+    context: 64000
+    priceIn: null
+    priceOut: null
+  - provider: openrouter
+    id: qwen/qwen-2.5-72b-instruct
+    name: Qwen 2.5 72B (OpenRouter)
+    context: 32000
+    priceIn: null
+    priceOut: null
+  - provider: anthropic
+    id: claude-sonnet-5-5
+    name: Claude Sonnet 5.5
+    context: 200000
+    priceIn: null
+    priceOut: null
+  - provider: anthropic
+    id: claude-haiku-5-5
+    name: Claude Haiku 5.5
+    context: 200000
+    priceIn: null
+    priceOut: null
+  - provider: openai
+    id: gpt-5-mini
+    name: GPT-5 mini
+    context: 128000
+    priceIn: null
+    priceOut: null
+  - provider: google
+    id: gemini-2.5-flash
+    name: Gemini 2.5 Flash
+    context: 1000000
+    priceIn: null
+    priceOut: null

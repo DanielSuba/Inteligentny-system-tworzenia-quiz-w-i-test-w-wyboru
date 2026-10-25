@@ -92,3 +92,13 @@ async def test_cannot_attach_someone_elses_media(client, other, outbox):
     quiz = await newQuiz(client)
     res = await client.post(f"/api/quizzes/{quiz['id']}/questions", json={**SINGLE, "mediaId": media["id"]})
     assert res.status_code == 400 and res.json()["detail"] == "invalid_media"
+
+
+# YouTube moze byc muzyka albo wideo, ale nie obrazem
+async def test_youtube_as_music(client, outbox):
+    await registerAndLogin(client, outbox)
+    url = "https://youtu.be/dQw4w9WgXcQ"
+    music = await client.post("/api/media-items/link", json={"kind": "audio", "url": url})
+    assert music.json()["kind"] == "audio" and music.json()["source"] == "youtube"
+    img = await client.post("/api/media-items/link", json={"kind": "image", "url": url})
+    assert img.status_code == 400

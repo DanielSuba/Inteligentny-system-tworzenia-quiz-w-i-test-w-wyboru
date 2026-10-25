@@ -14,8 +14,12 @@ export type RegisterData = {
 
 export const register = (data: RegisterData) => api<Status>("/auth/register", { json: data });
 
+// konto z 2FA zwraca { status: "2fa_required" } zamiast uzytkownika
 export const login = (email: string, password: string) =>
-  api<Me>("/auth/login", { json: { email, password } });
+  api<Me | Status>("/auth/login", { json: { email, password } });
+
+// drugi krok logowania: kod z aplikacji albo kod zapasowy
+export const loginCode = (code: string) => api<Me>("/auth/login/2fa", { json: { code } });
 
 export const logout = () => api<void>("/auth/logout", { method: "POST" });
 

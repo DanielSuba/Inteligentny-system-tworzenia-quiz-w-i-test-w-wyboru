@@ -1,7 +1,7 @@
 [project]
-name = "quizforge-backend"
+name = "apocrypha-backend"
 version = "0.1.0"
-description = "QuizForge: backend (FastAPI)"
+description = "Apocrypha: backend (FastAPI)"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi",
@@ -19,6 +19,11 @@ dependencies = [
     "aiosmtplib>=5.1.3",
     "rapidfuzz>=3.14.6",
     "filetype>=1.2.0",
+    "pyotp>=2.10.0",
+    "segno>=1.6.6",
+    "cryptography>=50.0.2",
+    "httpx>=0.28.1",
+    "pyyaml>=6.0.3",
 ]
 
 [dependency-groups]

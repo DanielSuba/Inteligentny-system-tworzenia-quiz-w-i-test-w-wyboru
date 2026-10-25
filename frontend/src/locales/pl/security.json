@@ -1,0 +1,63 @@
+{
+  "title": "Bezpieczeństwo",
+  "twoFactor": {
+    "title": "Weryfikacja dwuetapowa (2FA)",
+    "on": "Włączona",
+    "off": "Wyłączona",
+    "lead": "Przy logowaniu oprócz hasła wpiszesz kod z aplikacji (np. Google Authenticator, Aegis, Authy). Wymagana do zapisania kluczy API.",
+    "start": "Włącz 2FA",
+    "scan": "Zeskanuj kod QR w aplikacji uwierzytelniającej albo wpisz klucz ręcznie:",
+    "code": "Kod z aplikacji",
+    "confirm": "Potwierdź i włącz",
+    "cancel": "Anuluj",
+    "backupLeft": "Pozostałe kody zapasowe: {{count}}",
+    "codesTitle": "Kody zapasowe",
+    "codesLead": "Zapisz je w bezpiecznym miejscu. Każdy działa jeden raz, gdy nie masz dostępu do telefonu. Nie pokażemy ich ponownie.",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano",
+    "download": "Pobierz .txt",
+    "saved": "Zapisałem kody",
+    "regenerate": "Nowe kody zapasowe",
+    "disable": "Wyłącz 2FA",
+    "codeOrBackup": "Kod z aplikacji albo kod zapasowy",
+    "run": "Wykonaj"
+  },
+  "stepUp": {
+    "lead": "Ta zmiana wymaga potwierdzenia kodem (ważne 5 minut).",
+    "submit": "Potwierdź"
+  },
+  "keys": {
+    "title": "Klucze API do AI",
+    "lead": "Własne klucze do generowania pytań. Są szyfrowane i nigdy nie wracają do przeglądarki, widać tylko 4 ostatnie znaki.",
+    "need2fa": "Aby zapisać klucz, najpierw włącz weryfikację dwuetapową.",
+    "none": "Nie masz zapisanych kluczy.",
+    "provider": "Dostawca",
+    "label": "Nazwa (opcjonalnie)",
+    "key": "Klucz API",
+    "add": "Sprawdź i zapisz klucz",
+    "delete": "Usuń",
+    "added": "dodano {{date}}",
+    "used": "użyto {{date}}",
+    "neverUsed": "jeszcze nie użyty"
+  },
+  "models": {
+    "title": "Dostępne modele",
+    "lead": "Modele, których możesz użyć do generowania pytań (etap 4).",
+    "none": "Brak dostępnych modeli. Dodaj klucz API albo uruchom LM Studio.",
+    "user": "twój klucz",
+    "system": "klucz systemowy",
+    "local": "lokalny (LM Studio)",
+    "context": "kontekst {{n}} tys. tokenów"
+  },
+  "audit": {
+    "title": "Ostatnie zdarzenia",
+    "none": "Brak zdarzeń.",
+    "2fa_enabled": "Włączono 2FA",
+    "2fa_disabled": "Wyłączono 2FA",
+    "backup_codes_regenerated": "Nowe kody zapasowe",
+    "api_key_added": "Dodano klucz API",
+    "api_key_deleted": "Usunięto klucz API",
+    "step_up_failed": "Błędny kod przy potwierdzeniu",
+    "login_2fa_failed": "Błędny kod przy logowaniu"
+  }
+}

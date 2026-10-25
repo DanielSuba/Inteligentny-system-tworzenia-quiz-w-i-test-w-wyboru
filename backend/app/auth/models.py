@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, func
+from sqlalchemy import DateTime, ForeignKey, Integer, LargeBinary, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -19,6 +19,11 @@ class User(Base):
     createdAt: Mapped[datetime] = mapped_column(
         "created_at", DateTime(timezone=True), server_default=func.now()
     )
+    # 2FA (TOTP): sekret zaszyfrowany kluczem glownym; wlaczone, gdy totpEnabledAt jest ustawione
+    totpSecret: Mapped[bytes | None] = mapped_column("totp_secret", LargeBinary)
+    totpNonce: Mapped[bytes | None] = mapped_column("totp_nonce", LargeBinary)
+    totpKeyVersion: Mapped[int | None] = mapped_column("totp_key_version", Integer)
+    totpEnabledAt: Mapped[datetime | None] = mapped_column("totp_enabled_at", DateTime(timezone=True))
 
 
 # jednorazowy token z e-maila: weryfikacja adresu albo reset hasla

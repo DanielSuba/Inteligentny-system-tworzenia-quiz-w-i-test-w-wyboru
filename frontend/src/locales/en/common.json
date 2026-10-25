@@ -9,7 +9,9 @@
     "menu": "Menu",
     "close": "Close menu",
     "status": "System status",
-    "quizzes": "My quizzes"
+    "quizzes": "My quizzes",
+    "security": "Security",
+    "general": "General"
   },
   "lang": {
     "label": "Language",
@@ -50,7 +52,17 @@
     "invalid_media": "These media can't be attached.",
     "invalid_url": "Enter an address starting with http:// or https://.",
     "invalid_order": "The question list changed. Refresh the page.",
-    "invalid_file_type": "This file type isn't supported."
+    "invalid_file_type": "This file type isn't supported.",
+    "invalid_code": "Wrong code.",
+    "2fa_expired": "Login expired. Enter your password again.",
+    "2fa_required": "Turn on two-step verification first.",
+    "step_up_required": "Confirm this change with a code from your app.",
+    "keys_require_2fa": "You can't turn off 2FA while you have saved API keys. Delete them first.",
+    "2fa_already_enabled": "Two-step verification is already on.",
+    "2fa_not_enabled": "Two-step verification is off.",
+    "invalid_api_key": "The provider rejected this key. Check that it's correct.",
+    "provider_unreachable": "Couldn't reach the provider. Try again later.",
+    "api_key_not_found": "Key not found."
   },
   "health": {
     "title": "System status",

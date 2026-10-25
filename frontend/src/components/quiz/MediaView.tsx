@@ -7,7 +7,13 @@ export function MediaView({ media }: { media: Media }) {
     if (media.startS != null) params.set("start", String(media.startS));
     if (media.endS != null) params.set("end", String(media.endS));
     return (
-      <div className="aspect-video w-full max-w-xl border border-line shadow-ring">
+      <div
+        className={
+          media.kind === "audio"
+            ? "aspect-video w-full max-w-xs border border-line shadow-ring"
+            : "aspect-video w-full max-w-xl border border-line shadow-ring"
+        }
+      >
         <iframe
           className="h-full w-full"
           src={`https://www.youtube-nocookie.com/embed/${media.youtubeId}?${params}`}

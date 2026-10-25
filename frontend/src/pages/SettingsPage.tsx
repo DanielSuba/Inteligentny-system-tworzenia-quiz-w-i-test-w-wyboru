@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { changePassword, updateMe } from "@/api/me";
 import { LangSwitch } from "@/components/layout/LangSwitch";
+import { SettingsTabs } from "@/components/layout/SettingsTabs";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { Notice } from "@/components/ui/Notice";
@@ -55,6 +56,7 @@ export function SettingsPage() {
   return (
     <div className="mx-auto flex max-w-xl flex-col gap-8">
       <h1 className="pixel uppercase">{t("settings.title")}</h1>
+      <SettingsTabs />
 
       <section className="flex flex-col gap-3 border-t border-line pt-5">
         <h2 className="pixel uppercase text-mut">{t("settings.look")}</h2>

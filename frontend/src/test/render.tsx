@@ -9,6 +9,7 @@ export const testUser: Me = {
   id: "1",
   email: "ania@example.com",
   emailVerified: true,
+  twoFactorEnabled: false,
   role: "user",
   username: "ania",
   displayName: "Ania",

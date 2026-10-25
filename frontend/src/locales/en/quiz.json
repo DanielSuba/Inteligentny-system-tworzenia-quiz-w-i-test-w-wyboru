@@ -104,24 +104,22 @@
     "acceptedMin": "Add at least one accepted answer."
   },
   "media": {
-    "label": "Media",
-    "add": "Add media",
+    "label": "Question media",
     "remove": "Remove media",
-    "link": "Link",
-    "upload": "File",
-    "kind": "Type",
     "image": "Image",
-    "audio": "Audio",
+    "audio": "Music",
     "video": "Video",
     "url": "Address (http/https)",
-    "urlHint": "YouTube links are detected automatically.",
     "start": "From second",
     "end": "To second",
     "attach": "Attach",
-    "file": "Choose file",
-    "limits": "Limits: image 5 MB, audio 20 MB, video 100 MB.",
-    "uploading": "Uploading…",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "add_image": "Image",
+    "add_audio": "Music",
+    "add_video": "Video",
+    "hint_image": "Direct link to an image (usually ends with .jpg, .png, .webp, .gif).",
+    "hint_audio": "Link to an audio file (.mp3, .ogg) or to YouTube.",
+    "hint_video": "Link to YouTube or to a video file (.mp4, .webm)."
   },
   "preview": {
     "title": "Preview",

@@ -23,6 +23,7 @@ async def getMe(db: AsyncSession, user: User, prof: Profile | None = None) -> Me
         id=user.id,
         email=user.email,
         emailVerified=user.emailVerifiedAt is not None,
+        twoFactorEnabled=user.totpEnabledAt is not None,
         role=user.role,
         username=prof.username,
         displayName=prof.displayName,

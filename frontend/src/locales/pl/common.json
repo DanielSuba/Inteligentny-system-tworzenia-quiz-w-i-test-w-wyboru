@@ -9,7 +9,9 @@
     "menu": "Menu",
     "close": "Zamknij menu",
     "status": "Stan systemu",
-    "quizzes": "Moje quizy"
+    "quizzes": "Moje quizy",
+    "security": "Bezpieczeństwo",
+    "general": "Ogólne"
   },
   "lang": {
     "label": "Język",
@@ -50,7 +52,17 @@
     "invalid_media": "Nie można dołączyć tych mediów.",
     "invalid_url": "Podaj adres zaczynający się od http:// lub https://.",
     "invalid_order": "Lista pytań się zmieniła. Odśwież stronę.",
-    "invalid_file_type": "Ten rodzaj pliku nie jest obsługiwany."
+    "invalid_file_type": "Ten rodzaj pliku nie jest obsługiwany.",
+    "invalid_code": "Nieprawidłowy kod.",
+    "2fa_expired": "Logowanie wygasło. Wpisz hasło jeszcze raz.",
+    "2fa_required": "Najpierw włącz weryfikację dwuetapową.",
+    "step_up_required": "Potwierdź tę zmianę kodem z aplikacji.",
+    "keys_require_2fa": "Nie można wyłączyć 2FA, dopóki masz zapisane klucze API. Najpierw je usuń.",
+    "2fa_already_enabled": "Weryfikacja dwuetapowa jest już włączona.",
+    "2fa_not_enabled": "Weryfikacja dwuetapowa jest wyłączona.",
+    "invalid_api_key": "Dostawca odrzucił ten klucz. Sprawdź, czy jest poprawny.",
+    "provider_unreachable": "Nie udało się połączyć z dostawcą. Spróbuj później.",
+    "api_key_not_found": "Nie znaleziono klucza."
   },
   "health": {
     "title": "Stan systemu",

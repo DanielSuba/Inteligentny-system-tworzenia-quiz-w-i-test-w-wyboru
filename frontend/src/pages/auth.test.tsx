@@ -43,6 +43,17 @@ describe("LoginPage", () => {
     await vi.waitFor(() => expect(auth.setUser).toHaveBeenCalledWith(testUser));
   });
 
+  it("konto z 2FA prosi o kod", async () => {
+    mockFetch(200, { status: "2fa_required" });
+    document.cookie = "qf_csrf=abc";
+    const auth = renderPage(<LoginPage />);
+    type("E-mail", "ania@example.com");
+    type("Hasło", "dobre-haslo-123");
+    fireEvent.click(screen.getByRole("button", { name: "Zaloguj się" }));
+    expect(await screen.findByRole("heading", { name: "Kod weryfikacyjny" })).toBeInTheDocument();
+    expect(auth.setUser).not.toHaveBeenCalled();
+  });
+
   it("dziala po angielsku", async () => {
     setLocale("en");
     mockFetch(200, {});

@@ -1,0 +1,63 @@
+{
+  "title": "Security",
+  "twoFactor": {
+    "title": "Two-step verification (2FA)",
+    "on": "On",
+    "off": "Off",
+    "lead": "When logging in you'll enter a code from an app (e.g. Google Authenticator, Aegis, Authy) besides your password. Required to save API keys.",
+    "start": "Turn on 2FA",
+    "scan": "Scan the QR code in your authenticator app or enter the key by hand:",
+    "code": "Code from the app",
+    "confirm": "Confirm and turn on",
+    "cancel": "Cancel",
+    "backupLeft": "Backup codes left: {{count}}",
+    "codesTitle": "Backup codes",
+    "codesLead": "Keep them somewhere safe. Each one works once when you can't use your phone. We won't show them again.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download .txt",
+    "saved": "I saved the codes",
+    "regenerate": "New backup codes",
+    "disable": "Turn off 2FA",
+    "codeOrBackup": "App code or backup code",
+    "run": "Go"
+  },
+  "stepUp": {
+    "lead": "This change needs a code confirmation (valid for 5 minutes).",
+    "submit": "Confirm"
+  },
+  "keys": {
+    "title": "AI API keys",
+    "lead": "Your own keys for generating questions. They're encrypted and never sent back to the browser, only the last 4 characters are shown.",
+    "need2fa": "To save a key, turn on two-step verification first.",
+    "none": "You have no saved keys.",
+    "provider": "Provider",
+    "label": "Name (optional)",
+    "key": "API key",
+    "add": "Check and save key",
+    "delete": "Delete",
+    "added": "added {{date}}",
+    "used": "used {{date}}",
+    "neverUsed": "not used yet"
+  },
+  "models": {
+    "title": "Available models",
+    "lead": "Models you can use to generate questions (stage 4).",
+    "none": "No models available. Add an API key or start LM Studio.",
+    "user": "your key",
+    "system": "system key",
+    "local": "local (LM Studio)",
+    "context": "{{n}}k token context"
+  },
+  "audit": {
+    "title": "Recent events",
+    "none": "No events.",
+    "2fa_enabled": "2FA turned on",
+    "2fa_disabled": "2FA turned off",
+    "backup_codes_regenerated": "New backup codes",
+    "api_key_added": "API key added",
+    "api_key_deleted": "API key deleted",
+    "step_up_failed": "Wrong confirmation code",
+    "login_2fa_failed": "Wrong login code"
+  }
+}

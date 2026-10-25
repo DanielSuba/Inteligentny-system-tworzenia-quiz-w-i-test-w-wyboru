@@ -7,6 +7,7 @@ export type Me = {
   id: string;
   email: string;
   emailVerified: boolean;
+  twoFactorEnabled: boolean;
   role: string;
   username: string;
   displayName: string;

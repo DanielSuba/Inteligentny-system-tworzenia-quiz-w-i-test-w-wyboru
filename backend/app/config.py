@@ -26,7 +26,7 @@ class Settings(BaseSettings):
 
     smtpHost: str = "localhost"
     smtpPort: int = 1025
-    mailFrom: str = "QuizForge <no-reply@quizforge.local>"
+    mailFrom: str = "Apocrypha <no-reply@apocrypha.local>"
 
     # pliki uzytkownikow (avatary, pozniej materialy)
     storageDir: Path = ROOT / "storage"
@@ -36,6 +36,20 @@ class Settings(BaseSettings):
     mediaVideoMb: int = 100
 
     sessionDays: int = 30
+
+    # szyfrowanie kluczy API i sekretow 2FA (AES-256-GCM); stare klucze: "1:base64,2:base64"
+    masterKey: str = ""
+    masterKeyVersion: int = 1
+    masterKeysOld: str = ""
+
+    # klucze systemowe AI (na czas testow) i modele lokalne
+    allowSystemKeys: bool = True
+    systemDailyCalls: int = 50
+    openrouterApiKey: str = ""
+    openaiApiKey: str = ""
+    anthropicApiKey: str = ""
+    googleApiKey: str = ""
+    lmstudioBaseUrl: str = "http://localhost:1234/v1"
 
     @property
     def isProd(self) -> bool:

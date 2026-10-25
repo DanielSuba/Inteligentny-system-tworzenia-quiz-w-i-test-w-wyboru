@@ -12,6 +12,7 @@ import { QuizEditorPage } from "@/pages/QuizEditorPage";
 import { QuizPreviewPage } from "@/pages/QuizPreviewPage";
 import { QuizzesPage } from "@/pages/QuizzesPage";
 import { RegisterPage } from "@/pages/RegisterPage";
+import { SecurityPage } from "@/pages/SecurityPage";
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 import { VerifyEmailPage } from "@/pages/VerifyEmailPage";
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <SettingsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/settings/security",
+        element: (
+          <RequireAuth>
+            <SecurityPage />
           </RequireAuth>
         ),
       },

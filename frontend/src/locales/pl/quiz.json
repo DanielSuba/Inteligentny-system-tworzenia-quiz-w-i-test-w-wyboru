@@ -106,24 +106,22 @@
     "acceptedMin": "Dodaj co najmniej jedną akceptowaną odpowiedź."
   },
   "media": {
-    "label": "Media",
-    "add": "Dodaj media",
+    "label": "Media pytania",
     "remove": "Usuń media",
-    "link": "Link",
-    "upload": "Plik",
-    "kind": "Rodzaj",
     "image": "Obraz",
-    "audio": "Dźwięk",
+    "audio": "Muzyka",
     "video": "Wideo",
     "url": "Adres (http/https)",
-    "urlHint": "Link do YouTube zostanie rozpoznany automatycznie.",
     "start": "Od sekundy",
     "end": "Do sekundy",
     "attach": "Dołącz",
-    "file": "Wybierz plik",
-    "limits": "Limity: obraz 5 MB, dźwięk 20 MB, wideo 100 MB.",
-    "uploading": "Wysyłanie…",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "add_image": "Obraz",
+    "add_audio": "Muzyka",
+    "add_video": "Wideo",
+    "hint_image": "Bezpośredni link do obrazu (kończy się zwykle na .jpg, .png, .webp, .gif).",
+    "hint_audio": "Link do pliku dźwiękowego (.mp3, .ogg) albo do YouTube.",
+    "hint_video": "Link do YouTube albo do pliku wideo (.mp4, .webm)."
   },
   "preview": {
     "title": "Podgląd",

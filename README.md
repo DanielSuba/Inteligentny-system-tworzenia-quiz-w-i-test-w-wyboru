@@ -1,4 +1,4 @@
-# QuizForge
+# Apocrypha
 
 Aplikacja webowa do tworzenia i przeprowadzania quizów, z pytaniami generowanymi przez AI z materiałów
 użytkownika, oraz narzędzie do porównywania modeli i strategii generowania pytań. Praca inżynierska.

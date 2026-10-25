@@ -79,7 +79,10 @@ async def addLink(db: AsyncSession, user: User, data: MediaLinkIn, store: Storag
         ownerId=user.id, kind=data.kind, source="link", url=data.url, startS=data.startS, endS=data.endS
     )
     if vid:
-        m.kind, m.source, m.youtubeId = "video", "youtube", vid
+        # YouTube jako muzyka albo wideo; obrazem byc nie moze
+        if data.kind == "image":
+            raise HTTPException(400, "invalid_url")
+        m.source, m.youtubeId = "youtube", vid
         m.startS = data.startS if data.startS is not None else linkStart
     db.add(m)
     await db.commit()

@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import os
 import re
 import tempfile
@@ -19,6 +20,8 @@ os.environ["DATABASE_URL"] = testUrl
 os.environ["REDIS_URL"] = re.sub(r"/\d+$", "", Settings().redisUrl) + "/15"
 os.environ["STORAGE_DIR"] = tempfile.mkdtemp(prefix="qf-test-")
 os.environ["APP_ENV"] = "test"
+os.environ["MASTER_KEY"] = base64.b64encode(os.urandom(32)).decode()
+os.environ["MASTER_KEY_VERSION"] = "1"
 
 from httpx import ASGITransport, AsyncClient  # noqa: E402
 from sqlalchemy import text  # noqa: E402

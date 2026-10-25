@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router";
-import { login, resendVerification } from "@/api/auth";
+import { login, loginCode, resendVerification } from "@/api/auth";
+import type { Me } from "@/api/me";
 import { ApiError } from "@/api/client";
 import { FormPage } from "@/components/layout/FormPage";
 import { Button } from "@/components/ui/Button";
@@ -23,6 +24,14 @@ export function LoginPage() {
   const [notVerified, setNotVerified] = useState(false);
   const [resent, setResent] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [needCode, setNeedCode] = useState(false);
+  const [code, setCode] = useState("");
+
+  function done(me: Me) {
+    setUser(me);
+    const next = params.get("next");
+    navigate(next?.startsWith("/") ? next : "/");
+  }
 
   // wysyla formularz logowania
   async function submit(e: FormEvent) {
@@ -34,11 +43,27 @@ export function LoginPage() {
     setBusy(true);
     setError("");
     try {
-      setUser(await login(email.trim(), pass));
-      const next = params.get("next");
-      navigate(next?.startsWith("/") ? next : "/");
+      const res = await login(email.trim(), pass);
+      // konto z 2FA: drugi krok z kodem
+      if ("status" in res) setNeedCode(true);
+      else done(res);
     } catch (err) {
       setNotVerified(err instanceof ApiError && err.code === "email_not_verified");
+      setError(errorText(err));
+    }
+    setBusy(false);
+  }
+
+  // drugi krok: kod z aplikacji albo kod zapasowy
+  async function submitCode(e: FormEvent) {
+    e.preventDefault();
+    if (!code.trim()) return;
+    setBusy(true);
+    setError("");
+    try {
+      done(await loginCode(code.trim()));
+    } catch (err) {
+      if (err instanceof ApiError && err.code === "2fa_expired") setNeedCode(false);
       setError(errorText(err));
     }
     setBusy(false);
@@ -47,6 +72,40 @@ export function LoginPage() {
   async function resend() {
     await resendVerification(email.trim()).catch(() => null);
     setResent(true);
+  }
+
+  if (needCode) {
+    return (
+      <FormPage title={t("login.codeTitle")}>
+        <form onSubmit={submitCode} noValidate className="flex flex-col gap-4">
+          <p className="text-mut">{t("login.codeLead")}</p>
+          <Field
+            label={t("login.code")}
+            autoComplete="one-time-code"
+            inputMode="text"
+            autoFocus
+            maxLength={20}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+          {error && <Notice kind="error">{error}</Notice>}
+          <Button type="submit" busy={busy}>
+            {t("login.codeSubmit")}
+          </Button>
+          <button
+            type="button"
+            onClick={() => {
+              setNeedCode(false);
+              setCode("");
+              setError("");
+            }}
+            className="self-start text-sm text-mut hover:text-fg"
+          >
+            {t("login.back")}
+          </button>
+        </form>
+      </FormPage>
+    );
   }
 
   return (
