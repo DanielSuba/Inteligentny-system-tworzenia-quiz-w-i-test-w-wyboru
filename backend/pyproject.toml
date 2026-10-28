@@ -24,6 +24,14 @@ dependencies = [
     "cryptography>=50.0.2",
     "httpx>=0.28.1",
     "pyyaml>=6.0.3",
+    "litellm>=1.106.6",
+    "instructor>=1.17.0",
+    "pymupdf>=2.1",
+    "python-docx>=1.2.0",
+    "python-pptx>=1.0.2",
+    "trafilatura>=2.3.1",
+    "taskiq>=0.13.0",
+    "taskiq-redis>=1.2.4",
 ]
 
 [dependency-groups]

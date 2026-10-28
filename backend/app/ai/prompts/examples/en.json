@@ -1,0 +1,46 @@
+{
+  "material": "Photosynthesis takes place in chloroplasts. Plants use light energy to turn carbon dioxide and water into glucose, and oxygen is released as a by-product. The pigment that absorbs light is chlorophyll.",
+  "questions": [
+    {
+      "question": "In which part of a plant cell does photosynthesis take place?",
+      "type": "single",
+      "options": [
+        { "text": "In chloroplasts", "isCorrect": true },
+        { "text": "In mitochondria", "isCorrect": false },
+        { "text": "In the nucleus", "isCorrect": false },
+        { "text": "In the vacuole", "isCorrect": false }
+      ],
+      "acceptedAnswers": [],
+      "explanation": "Photosynthesis happens in chloroplasts, which contain chlorophyll.",
+      "sourceQuote": "Photosynthesis takes place in chloroplasts.",
+      "difficulty": 1,
+      "bloomLevel": "remember",
+      "topic": "photosynthesis"
+    },
+    {
+      "question": "Oxygen is released as a by-product of photosynthesis.",
+      "type": "true_false",
+      "options": [
+        { "text": "True", "isCorrect": true },
+        { "text": "False", "isCorrect": false }
+      ],
+      "acceptedAnswers": [],
+      "explanation": "The main product is glucose; oxygen is released along the way.",
+      "sourceQuote": "oxygen is released as a by-product",
+      "difficulty": 1,
+      "bloomLevel": "understand",
+      "topic": "photosynthesis"
+    },
+    {
+      "question": "What is the name of the pigment that absorbs light in photosynthesis?",
+      "type": "open",
+      "options": [],
+      "acceptedAnswers": ["chlorophyll"],
+      "explanation": "Chlorophyll absorbs the light energy needed for photosynthesis.",
+      "sourceQuote": "The pigment that absorbs light is chlorophyll.",
+      "difficulty": 2,
+      "bloomLevel": "remember",
+      "topic": "photosynthesis"
+    }
+  ]
+}

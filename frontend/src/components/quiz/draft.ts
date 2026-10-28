@@ -1,4 +1,5 @@
 import type { Media } from "@/api/media";
+import type { GenParsed } from "@/api/generation";
 import type { Option, QType, Question, QuestionIn } from "@/api/quizzes";
 
 // pytanie w trakcie edycji (liczby jako tekst, bo to pola formularza)
@@ -122,5 +123,27 @@ export function toPayload(d: Draft): QuestionIn {
     fuzzyThreshold: d.fuzzyThreshold,
     caseSensitive: d.caseSensitive,
     ignoreAccents: d.ignoreAccents,
+  };
+}
+
+// pytanie od modelu AI -> szkic do poprawienia w edytorze
+export function fromGenerated(p: GenParsed): Draft {
+  return {
+    type: p.type,
+    text: p.question ?? "",
+    explanation: p.explanation ?? "",
+    difficulty: p.difficulty ?? 2,
+    timeLimitS: "",
+    points: "",
+    category: "",
+    media: null,
+    options:
+      p.type === "open"
+        ? []
+        : (p.options ?? []).map((o) => ({ text: o.text, isCorrect: o.isCorrect })),
+    accepted: p.type === "open" && p.acceptedAnswers?.length ? p.acceptedAnswers : [""],
+    fuzzyThreshold: 85,
+    caseSensitive: false,
+    ignoreAccents: true,
   };
 }

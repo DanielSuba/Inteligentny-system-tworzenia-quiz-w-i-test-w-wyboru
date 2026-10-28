@@ -22,6 +22,8 @@ os.environ["STORAGE_DIR"] = tempfile.mkdtemp(prefix="qf-test-")
 os.environ["APP_ENV"] = "test"
 os.environ["MASTER_KEY"] = base64.b64encode(os.urandom(32)).decode()
 os.environ["MASTER_KEY_VERSION"] = "1"
+os.environ["EMBED_MODEL"] = ""  # bez embeddingow z LM Studio w testach
+os.environ["TASK_BROKER"] = "memory"
 
 from httpx import ASGITransport, AsyncClient  # noqa: E402
 from sqlalchemy import text  # noqa: E402

@@ -12,7 +12,7 @@ from app.auth.models import User
 from app.common.storage import Storage
 from app.config import getSettings
 from app.media.models import Media
-from app.media.schemas import MediaLinkIn, MediaOut
+from app.media.schemas import MediaLinkIn, MediaOut, MediaUpdate
 
 # dozwolone typy plikow (rozpoznawane po zawartosci)
 ALLOWED = {
@@ -44,9 +44,13 @@ def toOut(m: Media, store: Storage) -> MediaOut:
         source=m.source,
         url=url,
         youtubeId=m.youtubeId,
+        embedId=m.embedId,
         startS=m.startS,
         endS=m.endS,
         mime=m.mime,
+        crop=m.crop,
+        displayWidth=m.displayWidth,
+        hideVideo=m.hideVideo,
     )
 
 
@@ -70,7 +74,22 @@ def youtubeId(url: str) -> tuple[str | None, int | None]:
     return None, None
 
 
-# zapisuje media z linku; YouTube rozpoznany automatycznie
+# SoundCloud: odtwarzacz przyjmuje caly adres utworu
+def isSoundcloud(url: str) -> bool:
+    host = (urlparse(url).hostname or "").removeprefix("www.").removeprefix("m.")
+    return host in ("soundcloud.com", "on.soundcloud.com")
+
+
+# Spotify: open.spotify.com/(intl-xx/)track|episode|album|playlist/<id> -> "track/<id>"
+def spotifyId(url: str) -> str | None:
+    p = urlparse(url)
+    if p.hostname != "open.spotify.com":
+        return None
+    m = re.match(r"^/(?:intl-[a-z-]+/)?(track|episode|album|playlist)/([A-Za-z0-9]{10,40})", p.path)
+    return f"{m.group(1)}/{m.group(2)}" if m else None
+
+
+# zapisuje media z linku; YouTube, SoundCloud i Spotify rozpoznawane automatycznie
 async def addLink(db: AsyncSession, user: User, data: MediaLinkIn, store: Storage) -> MediaOut:
     if urlparse(data.url).scheme not in ("http", "https"):
         raise HTTPException(400, "invalid_url")
@@ -84,6 +103,13 @@ async def addLink(db: AsyncSession, user: User, data: MediaLinkIn, store: Storag
             raise HTTPException(400, "invalid_url")
         m.source, m.youtubeId = "youtube", vid
         m.startS = data.startS if data.startS is not None else linkStart
+        # muzyka z YouTube domyslnie bez obrazu (gracz nie widzi tytulu ani teledysku)
+        m.hideVideo = data.hideVideo if data.hideVideo is not None else data.kind == "audio"
+    elif isSoundcloud(data.url) or spotifyId(data.url):
+        if data.kind != "audio":
+            raise HTTPException(400, "invalid_url")
+        m.source = "soundcloud" if isSoundcloud(data.url) else "spotify"
+        m.embedId = spotifyId(data.url)
     db.add(m)
     await db.commit()
     return toOut(m, store)
@@ -108,5 +134,19 @@ async def addUpload(db: AsyncSession, user: User, kind: str, data: bytes, store:
     m.path = f"media/{user.id}/{uuid.uuid4().hex}.{found.extension}"
     store.save(m.path, data)
     db.add(m)
+    await db.commit()
+    return toOut(m, store)
+
+
+# zmienia ustawienia mediow (tylko wlasciciel)
+async def update(db: AsyncSession, user: User, mediaId, data: MediaUpdate, store: Storage) -> MediaOut:
+    m = await db.get(Media, mediaId)
+    if not m or m.ownerId != user.id:
+        raise HTTPException(404, "media_not_found")
+    changes = data.model_dump(exclude_unset=True)
+    if "crop" in changes and m.kind != "image":
+        raise HTTPException(400, "crop_only_image")
+    for field, value in changes.items():
+        setattr(m, field, value)
     await db.commit()
     return toOut(m, store)

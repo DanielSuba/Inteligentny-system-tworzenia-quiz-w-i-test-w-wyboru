@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useRef, useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { linkMedia, type Media, type MediaKind } from "@/api/media";
-import { MediaView } from "@/components/quiz/MediaView";
+import { linkMedia, uploadMedia, type Media, type MediaKind } from "@/api/media";
+import { MediaSettings } from "@/components/media/MediaSettings";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { Notice } from "@/components/ui/Notice";
 import { PixelIcon } from "@/components/ui/PixelIcon";
 import type { IconName } from "@/components/ui/pixelIcons";
 import { errorText } from "@/lib/errors";
+import { cn } from "@/lib/utils";
 
 type Props = { media: Media | null; onChange: (m: Media | null) => void };
+type Mode = "link" | "upload";
 
 const kinds: { kind: MediaKind; icon: IconName }[] = [
   { kind: "image", icon: "image" },
@@ -17,38 +19,28 @@ const kinds: { kind: MediaKind; icon: IconName }[] = [
   { kind: "video", icon: "film" },
 ];
 
-// media pytania z linku: obraz, muzyka albo wideo (wgrywanie plikow w kolejnym etapie)
+// media pytania: obraz, muzyka albo wideo; z linku albo z pliku; potem ustawienia (kadr, fragment)
 export function MediaField({ media, onChange }: Props) {
   const { t } = useTranslation("quiz");
   const [kind, setKind] = useState<MediaKind | null>(null);
+  const [mode, setMode] = useState<Mode>("link");
   const [url, setUrl] = useState("");
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   function close() {
     setKind(null);
     setUrl("");
-    setStart("");
-    setEnd("");
     setError("");
   }
 
-  // dolacza media z linku
-  async function attach() {
-    if (!kind) return;
+  // dolacza media (link albo wgrany plik)
+  async function attach(make: () => Promise<Media>) {
     setBusy(true);
     setError("");
     try {
-      onChange(
-        await linkMedia({
-          kind,
-          url: url.trim(),
-          startS: start ? Number(start) : undefined,
-          endS: end ? Number(end) : undefined,
-        }),
-      );
+      onChange(await make());
       close();
     } catch (e) {
       setError(errorText(e));
@@ -56,17 +48,29 @@ export function MediaField({ media, onChange }: Props) {
     setBusy(false);
   }
 
+  function pickFile(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (file && kind) attach(() => uploadMedia(file, kind));
+  }
+
   if (media) {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <span className="text-sm text-mut">{t(`media.${media.kind}`)}</span>
-        <MediaView media={media} />
+        <MediaSettings key={media.id} media={media} onChange={onChange} />
         <Button variant="ghost" className="self-start px-0" onClick={() => onChange(null)}>
           {t("media.remove")}
         </Button>
       </div>
     );
   }
+
+  const tab = (m: Mode) =>
+    cn(
+      "border-b-2 px-3 py-1.5",
+      mode === m ? "border-acc text-fg" : "border-transparent text-mut hover:text-fg",
+    );
 
   return (
     <div className="flex flex-col gap-3">
@@ -87,36 +91,54 @@ export function MediaField({ media, onChange }: Props) {
 
       {kind && (
         <div className="flex flex-col gap-3 border border-line bg-surf p-3">
-          <Field
-            label={t("media.url")}
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            hint={t(`media.hint_${kind}`)}
-          />
-          {kind !== "image" && (
-            <div className="grid grid-cols-2 gap-3">
-              <Field
-                label={t("media.start")}
-                type="number"
-                min={0}
-                value={start}
-                onChange={(e) => setStart(e.target.value)}
-              />
-              <Field
-                label={t("media.end")}
-                type="number"
-                min={1}
-                value={end}
-                onChange={(e) => setEnd(e.target.value)}
-              />
-            </div>
+          <div className="flex gap-1" role="tablist">
+            <button
+              role="tab"
+              aria-selected={mode === "link"}
+              className={tab("link")}
+              onClick={() => setMode("link")}
+            >
+              {t("media.link")}
+            </button>
+            <button
+              role="tab"
+              aria-selected={mode === "upload"}
+              className={tab("upload")}
+              onClick={() => setMode("upload")}
+            >
+              {t("media.upload")}
+            </button>
+          </div>
+          {mode === "link" ? (
+            <Field
+              label={t("media.url")}
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              hint={t(`media.hint_${kind}`)}
+            />
+          ) : (
+            <>
+              <input ref={fileRef} type="file" hidden accept={`${kind}/*`} onChange={pickFile} />
+              <p className="text-sm text-mut">{t("media.limits")}</p>
+            </>
           )}
           {error && <Notice kind="error">{error}</Notice>}
           <div className="flex gap-2">
-            <Button onClick={attach} busy={busy} disabled={!url.trim()}>
-              {t("media.attach")}
-            </Button>
+            {mode === "link" ? (
+              <Button
+                onClick={() => attach(() => linkMedia({ kind, url: url.trim() }))}
+                busy={busy}
+                disabled={!url.trim()}
+              >
+                {t("media.attach")}
+              </Button>
+            ) : (
+              <Button busy={busy} onClick={() => fileRef.current?.click()}>
+                <PixelIcon name="upload" scale={1} />
+                {busy ? t("media.uploading") : t("media.file")}
+              </Button>
+            )}
             <Button variant="ghost" onClick={close}>
               {t("media.cancel")}
             </Button>

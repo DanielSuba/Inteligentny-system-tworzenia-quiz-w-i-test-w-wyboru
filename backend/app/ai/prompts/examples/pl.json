@@ -1,0 +1,46 @@
+{
+  "material": "Fotosynteza zachodzi w chloroplastach. Rośliny wykorzystują energię światła do przekształcenia dwutlenku węgla i wody w glukozę, a jako produkt uboczny powstaje tlen. Barwnikiem pochłaniającym światło jest chlorofil.",
+  "questions": [
+    {
+      "question": "W której części komórki roślinnej zachodzi fotosynteza?",
+      "type": "single",
+      "options": [
+        { "text": "W chloroplastach", "isCorrect": true },
+        { "text": "W mitochondriach", "isCorrect": false },
+        { "text": "W jądrze komórkowym", "isCorrect": false },
+        { "text": "W wakuoli", "isCorrect": false }
+      ],
+      "acceptedAnswers": [],
+      "explanation": "Fotosynteza przebiega w chloroplastach, które zawierają chlorofil.",
+      "sourceQuote": "Fotosynteza zachodzi w chloroplastach.",
+      "difficulty": 1,
+      "bloomLevel": "remember",
+      "topic": "fotosynteza"
+    },
+    {
+      "question": "Tlen powstaje w fotosyntezie jako produkt uboczny.",
+      "type": "true_false",
+      "options": [
+        { "text": "Prawda", "isCorrect": true },
+        { "text": "Fałsz", "isCorrect": false }
+      ],
+      "acceptedAnswers": [],
+      "explanation": "Głównym produktem jest glukoza, a tlen powstaje przy okazji.",
+      "sourceQuote": "a jako produkt uboczny powstaje tlen",
+      "difficulty": 1,
+      "bloomLevel": "understand",
+      "topic": "fotosynteza"
+    },
+    {
+      "question": "Jak nazywa się barwnik, który pochłania światło w fotosyntezie?",
+      "type": "open",
+      "options": [],
+      "acceptedAnswers": ["chlorofil"],
+      "explanation": "Chlorofil pochłania energię światła potrzebną do fotosyntezy.",
+      "sourceQuote": "Barwnikiem pochłaniającym światło jest chlorofil.",
+      "difficulty": 2,
+      "bloomLevel": "remember",
+      "topic": "fotosynteza"
+    }
+  ]
+}

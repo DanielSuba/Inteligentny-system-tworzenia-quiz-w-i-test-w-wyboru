@@ -1,3 +1,4 @@
+import uuid
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile
@@ -8,7 +9,7 @@ from app.auth.models import User
 from app.common.storage import Storage, getStorage
 from app.db.session import getDb
 from app.media import service
-from app.media.schemas import MediaLinkIn, MediaOut
+from app.media.schemas import MediaLinkIn, MediaOut, MediaUpdate
 
 router = APIRouter(prefix="/media-items", tags=["media"])
 
@@ -40,3 +41,15 @@ async def upload(
             raise HTTPException(413, "file_too_large")
         chunks.append(chunk)
     return await service.addUpload(db, user, kind, b"".join(chunks), store)
+
+
+# kadr obrazu, fragment muzyki/wideo, ukrycie wideo
+@router.patch("/{mediaId}")
+async def update(
+    mediaId: uuid.UUID,
+    data: MediaUpdate,
+    user: User = Depends(getCurrentUser),
+    db: AsyncSession = Depends(getDb),
+    store: Storage = Depends(getStorage),
+) -> MediaOut:
+    return await service.update(db, user, mediaId, data, store)

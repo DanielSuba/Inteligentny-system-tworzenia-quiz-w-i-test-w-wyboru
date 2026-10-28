@@ -227,6 +227,6 @@ async def reorder(db: AsyncSession, user: User, quizId: uuid.UUID, ids: list[uui
     return quiz
 
 
+# swieza wersja pytania z bazy (bez wygaszania innych obiektow sesji, np. uzytkownika)
 async def reload(db: AsyncSession, questionId: uuid.UUID) -> Question:
-    db.expire_all()
-    return await db.get(Question, questionId)
+    return await db.get(Question, questionId, populate_existing=True)

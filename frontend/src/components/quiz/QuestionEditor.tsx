@@ -21,6 +21,9 @@ type Props = {
   onDelete: () => void;
   saving: boolean;
   msg: { kind: "ok" | "error"; text: string } | null;
+  // recenzja pytan z AI: inne napisy, a "usun" to zwykle anulowanie bez potwierdzenia
+  saveLabel?: string;
+  deleteLabel?: string;
 };
 
 // formularz jednego pytania
@@ -32,6 +35,8 @@ export function QuestionEditor({
   onDelete,
   saving,
   msg,
+  saveLabel,
+  deleteLabel,
 }: Props) {
   const { t } = useTranslation("quiz");
   const [confirmDel, setConfirmDel] = useState(false);
@@ -93,14 +98,18 @@ export function QuestionEditor({
 
       <div className="flex flex-wrap items-center gap-2 border-t border-line pt-4">
         <Button onClick={onSave} busy={saving}>
-          {t("editor.save")}
+          {saveLabel ?? t("editor.save")}
         </Button>
         {draft.id && (
           <Button variant="secondary" onClick={onDuplicate}>
             {t("editor.duplicate")}
           </Button>
         )}
-        {confirmDel ? (
+        {deleteLabel ? (
+          <Button variant="ghost" className="ml-auto" onClick={onDelete}>
+            {deleteLabel}
+          </Button>
+        ) : confirmDel ? (
           <span className="flex items-center gap-2 text-sm">
             {t("editor.deleteConfirm")}
             <Button variant="secondary" className="border-bad text-bad" onClick={onDelete}>

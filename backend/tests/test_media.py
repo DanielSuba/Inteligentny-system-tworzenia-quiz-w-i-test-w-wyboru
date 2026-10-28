@@ -102,3 +102,65 @@ async def test_youtube_as_music(client, outbox):
     assert music.json()["kind"] == "audio" and music.json()["source"] == "youtube"
     img = await client.post("/api/media-items/link", json={"kind": "image", "url": url})
     assert img.status_code == 400
+
+
+def test_music_services():
+    from app.media.service import isSoundcloud, spotifyId
+
+    assert isSoundcloud("https://soundcloud.com/artysta/utwor")
+    assert (
+        spotifyId("https://open.spotify.com/intl-pl/track/4uLU6hMCjMI75M1A2tKUQC?si=x")
+        == "track/4uLU6hMCjMI75M1A2tKUQC"
+    )
+    assert spotifyId("https://example.com/track/4uLU6hMCjMI75M1A2tKUQC") is None
+
+
+async def test_music_links_and_media_settings(client, outbox):
+    await registerAndLogin(client, outbox)
+    yt = (
+        await client.post(
+            "/api/media-items/link", json={"kind": "audio", "url": "https://youtu.be/dQw4w9WgXcQ"}
+        )
+    ).json()
+    assert yt["hideVideo"] is True
+    vid = (
+        await client.post(
+            "/api/media-items/link", json={"kind": "video", "url": "https://youtu.be/dQw4w9WgXcQ"}
+        )
+    ).json()
+    assert vid["hideVideo"] is False
+    sc = await client.post(
+        "/api/media-items/link", json={"kind": "audio", "url": "https://soundcloud.com/a/b"}
+    )
+    assert sc.json()["source"] == "soundcloud"
+    sp = await client.post(
+        "/api/media-items/link",
+        json={"kind": "audio", "url": "https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC"},
+    )
+    assert sp.json()["source"] == "spotify" and sp.json()["embedId"] == "track/4uLU6hMCjMI75M1A2tKUQC"
+    assert (
+        await client.post(
+            "/api/media-items/link", json={"kind": "video", "url": "https://soundcloud.com/a/b"}
+        )
+    ).status_code == 400
+
+    # kadr i wielkosc obrazu, start muzyki
+    img = (
+        await client.post("/api/media-items/link", json={"kind": "image", "url": "https://example.com/a.jpg"})
+    ).json()
+    res = await client.patch(
+        f"/api/media-items/{img['id']}",
+        json={"crop": {"x": 10, "y": 20, "w": 50, "h": 40}, "displayWidth": 60},
+    )
+    assert res.json()["crop"] == {"x": 10, "y": 20, "w": 50, "h": 40} and res.json()["displayWidth"] == 60
+    bad = await client.patch(
+        f"/api/media-items/{img['id']}", json={"crop": {"x": 80, "y": 0, "w": 50, "h": 40}}
+    )
+    assert bad.status_code == 422
+    assert (
+        await client.patch(f"/api/media-items/{yt['id']}", json={"crop": {"x": 0, "y": 0, "w": 50, "h": 50}})
+    ).status_code == 400
+    res = await client.patch(
+        f"/api/media-items/{yt['id']}", json={"startS": 30, "endS": 45, "hideVideo": False}
+    )
+    assert res.json()["startS"] == 30 and res.json()["hideVideo"] is False

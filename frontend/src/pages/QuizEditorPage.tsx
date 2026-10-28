@@ -136,6 +136,12 @@ export function QuizEditorPage() {
           ← {t("settings.back")}
         </Link>
         <h1 className="mr-auto min-w-0 truncate text-xl font-bold">{quiz.title}</h1>
+        <Link
+          to={`/quizzes/${quiz.id}/generate`}
+          className="border border-acc bg-acc px-3 py-1.5 text-sm font-bold text-accfg shadow-ring"
+        >
+          {t("generate:open")}
+        </Link>
         <Link to={`/quizzes/${quiz.id}/preview`} className="text-sm text-acc hover:underline">
           {t("list.preview")}
         </Link>

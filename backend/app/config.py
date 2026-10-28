@@ -50,6 +50,14 @@ class Settings(BaseSettings):
     anthropicApiKey: str = ""
     googleApiKey: str = ""
     lmstudioBaseUrl: str = "http://localhost:1234/v1"
+    # model embeddingow w LM Studio (puste = bez embeddingow, duplikaty po podobienstwie tekstu)
+    embedModel: str = "text-embedding-nomic-embed-text-v1.5"
+
+    # materialy do generowania
+    materialMaxMb: int = 20
+    materialMaxTokens: int = 120000
+    # kolejka zadan: "redis" (worker taskiq) albo "memory" (w tym samym procesie, testy i praca bez workera)
+    taskBroker: str = "memory"
 
     @property
     def isProd(self) -> bool:

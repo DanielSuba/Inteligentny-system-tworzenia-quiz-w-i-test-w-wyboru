@@ -3,6 +3,8 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { GuestOnly, RequireAuth } from "@/components/layout/guards";
 import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
+import { GeneratePage } from "@/pages/GeneratePage";
+import { GenerationReviewPage } from "@/pages/GenerationReviewPage";
 import { HealthPage } from "@/pages/HealthPage";
 import { HomePage } from "@/pages/HomePage";
 import { LoginPage } from "@/pages/LoginPage";
@@ -79,6 +81,22 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <QuizEditorPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/quizzes/:id/generate",
+        element: (
+          <RequireAuth>
+            <GeneratePage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/generation/:jobId",
+        element: (
+          <RequireAuth>
+            <GenerationReviewPage />
           </RequireAuth>
         ),
       },
