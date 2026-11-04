@@ -164,3 +164,15 @@ async def test_models_include_lmstudio(client, outbox, monkeypatch):
         monkeypatch.setattr(getSettings(), name, "")
     await registerAndLogin(client, outbox)
     assert (await client.get("/api/ai/models")).json()[0]["source"] == "local"
+
+
+# filtr maskuje klucz, ale nie psuje liczb w formatach %d (log dostepu uvicorna)
+def test_log_filter_keeps_numbers():
+    from app.common.safety import RedactFilter
+
+    rec = logging.LogRecord(
+        "uvicorn.access", logging.INFO, "", 0, '%s - "%s" %d', ("sk-or-v1-TAJNYklucz1234", "GET /", 200), None
+    )
+    RedactFilter().filter(rec)
+    text = rec.getMessage()
+    assert text.endswith(" 200") and "TAJNY" not in text

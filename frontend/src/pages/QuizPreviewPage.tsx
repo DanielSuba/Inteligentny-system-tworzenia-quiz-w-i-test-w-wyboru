@@ -29,6 +29,14 @@ export function QuizPreviewPage() {
         <p className="text-sm text-mut">
           {t("preview.author", { name: quiz.authorName })} · {t("preview.asPlayer")}
         </p>
+        {quiz.questions.length > 0 && (
+          <Link
+            to={`/learn/${quiz.id}${token ? `?token=${encodeURIComponent(token)}` : ""}`}
+            className="self-start text-sm text-acc hover:underline"
+          >
+            {t("learn:start")}
+          </Link>
+        )}
         {quiz.isOwner && (
           <Link
             to={`/quizzes/${quiz.id}/edit`}

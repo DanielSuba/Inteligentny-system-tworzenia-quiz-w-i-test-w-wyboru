@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import {
   acceptAll,
   acceptGenerated,
@@ -19,6 +19,7 @@ import { errorText } from "@/lib/errors";
 export function GenerationReviewPage() {
   const { jobId = "" } = useParams();
   const { t } = useTranslation("generate");
+  const navigate = useNavigate();
   const [job, setJob] = useState<Job | null>(null);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -62,6 +63,7 @@ export function GenerationReviewPage() {
 
   const visible = job.questions.filter((q) => q.status !== "replaced");
   const pending = visible.filter((q) => q.status === "pending");
+  const accepted = visible.filter((q) => q.status === "accepted" || q.status === "edited").length;
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-5">
@@ -98,7 +100,11 @@ export function GenerationReviewPage() {
         </div>
       )}
       {job.status === "error" && (
-        <Notice kind="error">{t("review.error", { e: job.error ?? "" })}</Notice>
+        <Notice kind="error">
+          {job.error === "interrupted"
+            ? t("review.interrupted")
+            : t("review.error", { e: job.error ?? "" })}
+        </Notice>
       )}
       {job.status === "done" && job.error && (
         <Notice kind="info">{t("review.partial", { e: job.error })}</Notice>
@@ -121,7 +127,23 @@ export function GenerationReviewPage() {
           >
             {t("review.acceptAll")}
           </Button>
+          <Button
+            variant="secondary"
+            onClick={() =>
+              act(async () => {
+                await acceptAll(job.id);
+                navigate(`/learn/${job.quizId}`);
+              })
+            }
+          >
+            {t("review.acceptAllLearn")}
+          </Button>
         </div>
+      )}
+      {job.status === "done" && pending.length === 0 && accepted > 0 && (
+        <Link to={`/learn/${job.quizId}`} className="self-start text-acc hover:underline">
+          {t("learn:start")}
+        </Link>
       )}
 
       <ol className="flex flex-col">

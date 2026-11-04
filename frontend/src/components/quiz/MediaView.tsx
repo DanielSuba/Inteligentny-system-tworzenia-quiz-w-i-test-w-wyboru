@@ -6,7 +6,8 @@ import { isHiddenMusic } from "@/lib/media";
 // wyswietla media pytania: obraz (z kadrem), muzyke, wideo; fragment od-do
 export function MediaView({ media }: { media: Media }) {
   if (media.source === "youtube" || media.source === "soundcloud" || media.source === "spotify") {
-    return <EmbedPlayer media={media} hidden={isHiddenMusic(media)} />;
+    // key: nowy utwor = nowy odtwarzacz z czystym stanem (czas, pauza)
+    return <EmbedPlayer key={media.id} media={media} hidden={isHiddenMusic(media)} />;
   }
   if (media.kind === "image") return <CroppedImage media={media} />;
   // fragment pliku: #t=start,koniec (obsluguja to przegladarki)

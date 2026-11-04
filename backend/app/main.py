@@ -13,8 +13,11 @@ from app.common.health import router as healthRouter
 from app.common.safety import installLogFilter, validationHandler
 from app.common.storage import URL_PREFIX, getStorage
 from app.config import getSettings
+from app.db.session import makeSession
 from app.generation.router import router as generationRouter
+from app.generation.stale import interruptAll
 from app.generation.tasks import broker
+from app.learn.router import router as learnRouter
 from app.media.router import router as mediaRouter
 from app.profile.router import router as meRouter
 from app.quizzes.router import router as quizRouter
@@ -27,6 +30,10 @@ settings = getSettings()
 # start i stop kolejki zadan razem z API
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    # kolejka w pamieci: zadania sprzed restartu juz sie nie wykonaja
+    if settings.taskBroker == "memory" and settings.appEnv != "test":
+        async with makeSession() as db:
+            await interruptAll(db)
     await broker.startup()
     yield
     await broker.shutdown()
@@ -57,6 +64,7 @@ app.include_router(keysRouter, prefix="/api")
 app.include_router(aiRouter, prefix="/api")
 app.include_router(sourcesRouter, prefix="/api")
 app.include_router(generationRouter, prefix="/api")
+app.include_router(learnRouter, prefix="/api")
 
 # pliki uzytkownikow (avatary)
 app.mount(URL_PREFIX.rstrip("/"), StaticFiles(directory=getStorage().root), name="media")

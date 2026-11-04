@@ -93,7 +93,12 @@ export function MediaSettings({ media, onChange }: Props) {
     <div className="flex flex-col gap-3">
       {/* autor w edytorze widzi odtwarzacz, zeby wybrac moment startu */}
       {embed ? (
-        <EmbedPlayer media={media} hidden={false} onReady={(c) => (player.current = c)} />
+        <EmbedPlayer
+          key={media.id}
+          media={media}
+          hidden={false}
+          onReady={(c) => (player.current = c)}
+        />
       ) : media.kind === "audio" ? (
         <audio
           ref={(el) => void (fileEl.current = el)}

@@ -1,12 +1,10 @@
-import { useState, type CSSProperties, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { checkOpenAnswer, type QuizDetail } from "@/api/quizzes";
-import { answerColor, letters, shapes } from "@/components/quiz/answerLook";
+import { AnswerButton } from "@/components/quiz/AnswerButton";
 import { MediaView } from "@/components/quiz/MediaView";
 import { Button } from "@/components/ui/Button";
 import { Notice } from "@/components/ui/Notice";
-import { PixelIcon } from "@/components/ui/PixelIcon";
-import { cn } from "@/lib/utils";
 
 type Props = { quiz: QuizDetail; token?: string };
 
@@ -115,37 +113,17 @@ export function PreviewPlayer({ quiz, token }: Props) {
             <p className="text-sm text-mut">{t("preview.multiHint")}</p>
           )}
           <div className={"grid gap-3 sm:grid-cols-2"}>
-            {q.options.map((o, i) => {
-              const isGood = revealed && o.isCorrect;
-              const isBad = revealed && picked.includes(i) && !o.isCorrect;
-              return (
-                <button
-                  key={i}
-                  onClick={() => pick(i)}
-                  aria-pressed={picked.includes(i)}
-                  className={cn(
-                    "flex items-center gap-3 border bg-surf2 px-4 py-3 text-left text-lg shadow-ring transition-colors",
-                    picked.includes(i) && !revealed ? "border-acc" : "border-line",
-                    !revealed && "hover:border-[color:var(--c)]",
-                    isGood && "border-ok bg-[color-mix(in_srgb,var(--ok)_18%,var(--surf2))]",
-                    isBad && "border-bad bg-[color-mix(in_srgb,var(--bad)_18%,var(--surf2))]",
-                    revealed && !isGood && !isBad && "text-mut",
-                  )}
-                  style={{ "--c": answerColor(i) } as CSSProperties}
-                >
-                  <span style={{ color: answerColor(i) }}>
-                    <PixelIcon name={shapes[i]} scale={3} />
-                  </span>
-                  <span className="flex-1">{o.text}</span>
-                  {isGood && (
-                    <span className="text-ok">
-                      <PixelIcon name="check" scale={1} />
-                    </span>
-                  )}
-                  <span className="font-pixel text-[12px] text-mut">{letters[i]}</span>
-                </button>
-              );
-            })}
+            {q.options.map((o, i) => (
+              <AnswerButton
+                key={i}
+                i={i}
+                text={o.text}
+                picked={picked.includes(i)}
+                revealed={revealed}
+                good={o.isCorrect}
+                onClick={() => pick(i)}
+              />
+            ))}
           </div>
           {q.type === "multi" && !revealed && (
             <Button className="self-start" onClick={checkMulti} disabled={!picked.length}>

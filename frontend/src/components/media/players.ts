@@ -138,9 +138,10 @@ async function spotify(m: Media, box: HTMLElement, onState: (s: State) => void):
     playing = !e.data.isPaused;
     onState({ playing, time: now });
   });
+  // resume/pause zamiast togglePlay: seek sam wlacza granie, a przelacznik by je wtedy zatrzymal
   return {
-    play: () => (playing ? null : ctrl.togglePlay()),
-    pause: () => (playing ? ctrl.togglePlay() : null),
+    play: () => ctrl.resume(),
+    pause: () => ctrl.pause(),
     seek: (s) => ctrl.seek(s),
     time: () => now,
     destroy: () => ctrl.destroy?.(),

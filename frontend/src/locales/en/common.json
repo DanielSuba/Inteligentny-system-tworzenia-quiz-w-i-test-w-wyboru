@@ -79,7 +79,11 @@
     "generated_invalid": "The question breaks the rules; fix it before accepting.",
     "model_error": "The model returned an error.",
     "media_not_found": "Media not found.",
-    "crop_only_image": "Only images can be cropped."
+    "crop_only_image": "Only images can be cropped.",
+    "session_not_found": "Learning session not found.",
+    "session_ended": "This learning session has ended.",
+    "not_current_question": "This question is no longer active. Refresh the page.",
+    "quiz_empty": "This quiz has no questions yet."
   },
   "health": {
     "title": "System status",

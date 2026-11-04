@@ -2,12 +2,14 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import enAuth from "@/locales/en/auth.json";
 import enGenerate from "@/locales/en/generate.json";
+import enLearn from "@/locales/en/learn.json";
 import enCommon from "@/locales/en/common.json";
 import enProfile from "@/locales/en/profile.json";
 import enQuiz from "@/locales/en/quiz.json";
 import enSecurity from "@/locales/en/security.json";
 import plAuth from "@/locales/pl/auth.json";
 import plGenerate from "@/locales/pl/generate.json";
+import plLearn from "@/locales/pl/learn.json";
 import plCommon from "@/locales/pl/common.json";
 import plProfile from "@/locales/pl/profile.json";
 import plQuiz from "@/locales/pl/quiz.json";
@@ -23,6 +25,7 @@ export const resources = {
     quiz: plQuiz,
     security: plSecurity,
     generate: plGenerate,
+    learn: plLearn,
   },
   en: {
     common: enCommon,
@@ -31,6 +34,7 @@ export const resources = {
     quiz: enQuiz,
     security: enSecurity,
     generate: enGenerate,
+    learn: enLearn,
   },
 };
 
@@ -38,7 +42,7 @@ i18n.use(initReactI18next).init({
   resources,
   lng: getSavedLocale(),
   fallbackLng: "pl",
-  ns: ["common", "auth", "profile", "quiz", "security", "generate"],
+  ns: ["common", "auth", "profile", "quiz", "security", "generate", "learn"],
   defaultNS: "common",
   interpolation: { escapeValue: false },
 });

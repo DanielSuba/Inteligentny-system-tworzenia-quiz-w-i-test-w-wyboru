@@ -19,6 +19,7 @@ from app.generation import review, runner
 from app.generation.models import GeneratedQuestion, GenerationJob
 from app.generation.runner import PER_CALL_MATERIAL, PER_CALL_TOPIC
 from app.generation.schemas import EstimateOut, GenQuestionOut, JobIn, JobOut
+from app.generation.stale import expireStale
 from app.generation.strategies import STRATEGIES
 from app.generation.tasks import generateTask
 from app.quizzes.convert import questionOut
@@ -138,6 +139,7 @@ async def listJobs(
     quizId: uuid.UUID, user: User = Depends(getCurrentUser), db: AsyncSession = Depends(getDb)
 ) -> list[JobOut]:
     await getOwned(db, user, quizId)
+    await expireStale(db)
     rows = await db.scalars(
         select(GenerationJob)
         .where(GenerationJob.quizId == quizId)
@@ -151,7 +153,8 @@ async def listJobs(
 async def getJob(
     jobId: uuid.UUID, user: User = Depends(getCurrentUser), db: AsyncSession = Depends(getDb)
 ) -> JobOut:
-    job = await db.get(GenerationJob, jobId)
+    await expireStale(db)
+    job = await db.get(GenerationJob, jobId, populate_existing=True)
     if not job or job.userId != user.id:
         raise HTTPException(404, "job_not_found")
     return await jobOut(db, job, True)

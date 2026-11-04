@@ -18,9 +18,20 @@ def redact(text: str) -> str:
 class RedactFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
         record.msg = redact(str(record.msg))
-        if record.args:
-            record.args = tuple(redact(str(a)) for a in record.args)
+        if isinstance(record.args, dict):
+            record.args = {k: cleanArg(v) for k, v in record.args.items()}
+        elif record.args:
+            record.args = tuple(cleanArg(a) for a in record.args)
         return True
+
+
+# podmienia argument tylko gdy jest w nim klucz: liczby zostaja liczbami (formaty %d w logach)
+def cleanArg(a):
+    if a is None or isinstance(a, (int, float)):
+        return a
+    text = str(a)
+    hidden = redact(text)
+    return hidden if hidden != text else a
 
 
 def installLogFilter() -> None:

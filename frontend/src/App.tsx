@@ -7,6 +7,7 @@ import { GeneratePage } from "@/pages/GeneratePage";
 import { GenerationReviewPage } from "@/pages/GenerationReviewPage";
 import { HealthPage } from "@/pages/HealthPage";
 import { HomePage } from "@/pages/HomePage";
+import { LearnPage } from "@/pages/LearnPage";
 import { LoginPage } from "@/pages/LoginPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ProfilePage } from "@/pages/ProfilePage";
@@ -102,6 +103,14 @@ const router = createBrowserRouter([
       },
       { path: "/quizzes/:id/preview", element: <QuizPreviewPage /> },
       { path: "/share/:token", element: <QuizPreviewPage /> },
+      {
+        path: "/learn/:quizId",
+        element: (
+          <RequireAuth>
+            <LearnPage />
+          </RequireAuth>
+        ),
+      },
       { path: "/status", element: <HealthPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

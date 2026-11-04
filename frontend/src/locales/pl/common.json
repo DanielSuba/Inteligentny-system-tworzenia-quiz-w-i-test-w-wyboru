@@ -79,7 +79,11 @@
     "generated_invalid": "Pytanie nie spełnia reguł, popraw je przed przyjęciem.",
     "model_error": "Model zwrócił błąd.",
     "media_not_found": "Nie znaleziono mediów.",
-    "crop_only_image": "Kadrować można tylko obrazy."
+    "crop_only_image": "Kadrować można tylko obrazy.",
+    "session_not_found": "Nie znaleziono sesji nauki.",
+    "session_ended": "Ta sesja nauki już się zakończyła.",
+    "not_current_question": "To pytanie nie jest teraz aktywne. Odśwież stronę.",
+    "quiz_empty": "Ten quiz nie ma jeszcze pytań."
   },
   "health": {
     "title": "Stan systemu",

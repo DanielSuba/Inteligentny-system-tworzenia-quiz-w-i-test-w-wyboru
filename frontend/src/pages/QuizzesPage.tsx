@@ -29,14 +29,15 @@ export function QuizzesPage() {
     return () => clearTimeout(timer);
   }, [q, vis]);
 
-  async function add() {
+  // nowy quiz; "ucz sie z materialu" od razu prowadzi do generowania pytan
+  async function add(learn = false) {
     setBusy(true);
     try {
       const quiz = await createQuiz({
-        title: t("list.defaultTitle"),
+        title: learn ? t("learn:fromMaterialTitle") : t("list.defaultTitle"),
         language: i18n.language as "pl" | "en",
       });
-      navigate(`/quizzes/${quiz.id}/edit`);
+      navigate(learn ? `/quizzes/${quiz.id}/generate` : `/quizzes/${quiz.id}/edit`);
     } catch (e) {
       setError(errorText(e));
       setBusy(false);
@@ -51,7 +52,10 @@ export function QuizzesPage() {
     <section className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-3 border-t border-line pt-5">
         <h1 className="pixel mr-auto uppercase">{t("list.title")}</h1>
-        <Button onClick={add} busy={busy}>
+        <Button variant="secondary" onClick={() => add(true)} busy={busy}>
+          {t("learn:fromMaterial")}
+        </Button>
+        <Button onClick={() => add()} busy={busy}>
           + {t("list.new")}
         </Button>
       </div>
@@ -112,6 +116,11 @@ export function QuizzesPage() {
               <Link to={`/quizzes/${quiz.id}/preview`} className="text-mut hover:text-fg">
                 {t("list.preview")}
               </Link>
+              {quiz.questionCount > 0 && (
+                <Link to={`/learn/${quiz.id}`} className="text-mut hover:text-fg">
+                  {t("learn:start")}
+                </Link>
+              )}
             </span>
           </li>
         ))}

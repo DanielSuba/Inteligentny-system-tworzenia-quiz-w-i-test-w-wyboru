@@ -2,6 +2,7 @@
 from app.auth.models import EmailToken, User
 from app.cosmetics.models import CosmeticItem, UserCosmetic
 from app.generation.models import GeneratedQuestion, GenerationJob, QuestionReview
+from app.learn.models import LearningProgress, LearningSession
 from app.media.models import Media
 from app.profile.models import Profile
 from app.quizzes.models import AnswerOption, OpenAnswer, Question, Quiz
@@ -25,6 +26,8 @@ __all__ = [
     "GeneratedQuestion",
     "GenerationJob",
     "QuestionReview",
+    "LearningProgress",
+    "LearningSession",
     "SourceChunk",
     "SourceDocument",
 ]

@@ -90,6 +90,7 @@ async def runJob(jobId: uuid.UUID) -> None:
         if not job or job.status != "queued":
             return
         job.status = "running"
+        job.heartbeatAt = datetime.now(UTC)
         await db.commit()
         start = time.monotonic()
         try:
@@ -121,6 +122,8 @@ async def runJob(jobId: uuid.UUID) -> None:
                 except Exception as e:
                     failures.append(redact(str(e))[:300])
                     job.calls += 1
+                    job.heartbeatAt = datetime.now(UTC)
+                    await db.commit()
                     continue
                 job.calls += 1
                 job.tokensIn += res.tokensIn
@@ -133,6 +136,7 @@ async def runJob(jobId: uuid.UUID) -> None:
                     await store(db, job, idx, q, chunk, known)
                     idx += 1
                 job.progress = round(100 * (n + 1) / len(steps))
+                job.heartbeatAt = datetime.now(UTC)
                 await db.commit()
 
             job.costUsd = round(sum(costs), 6) if costs else None

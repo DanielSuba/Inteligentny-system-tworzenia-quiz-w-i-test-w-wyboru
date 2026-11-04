@@ -41,6 +41,8 @@ class GenerationJob(Base):
         "created_at", DateTime(timezone=True), server_default=func.now()
     )
     finishedAt: Mapped[datetime | None] = mapped_column("finished_at", DateTime(timezone=True))
+    # ostatni znak zycia dzialajacego zadania (wykrywanie zadan przerwanych awaria)
+    heartbeatAt: Mapped[datetime | None] = mapped_column("heartbeat_at", DateTime(timezone=True))
 
 
 # pytanie zwrocone przez model, z wynikami automatycznych sprawdzen

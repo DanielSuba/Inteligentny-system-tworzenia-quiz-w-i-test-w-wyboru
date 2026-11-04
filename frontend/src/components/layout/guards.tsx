@@ -6,7 +6,8 @@ import { useAuth } from "@/hooks/useAuth";
 export function RequireAuth({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const loc = useLocation();
-  if (!user) return <Navigate to={`/login?next=${encodeURIComponent(loc.pathname)}`} replace />;
+  if (!user)
+    return <Navigate to={`/login?next=${encodeURIComponent(loc.pathname + loc.search)}`} replace />;
   return children;
 }
 
